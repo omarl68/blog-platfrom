@@ -1,0 +1,12 @@
+tags:
+  - name: User
+    description: Everything about Users
+
+  - name: Role
+    description: Everything about Role
+
+  - name: Admin/User
+    description: Everything about Admin/User
+
+  - name: Admin/Todo
+    description: Everything about Admin/Todo

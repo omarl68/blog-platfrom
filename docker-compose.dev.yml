@@ -1,0 +1,36 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - blog-app
+
+  db:
+    image: mongo
+    container_name: db
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    volumes:
+      - db-data:/data/db
+    networks:
+      - blog-app
+
+volumes:
+  db-data:
+
+networks:
+  blog-app:
+    name: ${NETWORK_NAME}
+    driver: bridge

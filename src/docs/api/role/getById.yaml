@@ -1,0 +1,35 @@
+paths:
+  /api/roles/{id}:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Role
+      summary: Find a Role By Id
+      description: Returns a single Role.
+      parameters:
+        - name: id
+          in: path
+          description: ID of Role to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Success"
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"

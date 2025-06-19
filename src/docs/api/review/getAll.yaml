@@ -1,0 +1,33 @@
+paths:
+  /api/reviews:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Review
+      summary: Get All Reviews
+      description: Returns all Reviews.
+      parameters:
+        - name: page
+          in: query
+          description: Page of pagination
+          schema:
+            type: number
+        - name: pageSize
+          in: query
+          description: Page size of pagination
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Success"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
