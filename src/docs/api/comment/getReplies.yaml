@@ -1,0 +1,40 @@
+paths:
+  /api/articles/{articleId}/comments/{parentId}/replies:
+    get:
+      tags:
+        - Comment
+      summary: Get replies for a specific comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: parentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of replies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        404:
+          description: Comment or article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

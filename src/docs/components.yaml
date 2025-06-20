@@ -75,41 +75,6 @@ components:
         token:
           type: string
           description: The token of the user
-    Todo:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          description: The name of the todo
-        description:
-          type: string
-          description: The description of the todo
-        isConpleted:
-          type: boolean
-          default: false
-          description: True if todo is completed
-
-    Review:
-      type: object
-      required:
-        - rating
-        - transporter
-        - createdBy
-      properties:
-        rating:
-          type: number
-          description: Rating of the transporter (between 1-5)
-        transporter:
-          type: string
-          description: The id of the transporter
-        createdBy:
-          type: string
-          description: The creator of the review
-        description:
-          type: string
-          description: Description of the review
 
     role:
       type: object
@@ -120,6 +85,100 @@ components:
         status:
           type: string
           description: The status of role
+
+    Article:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [draft, published, archived, deleted]
+        author:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+    CreateArticle:
+      type: object
+      required: [title, content]
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [draft, published, archived]
+
+    UpdateArticle:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [draft, published, archived, deleted]
+
+    Comment:
+      type: object
+      properties:
+        _id:
+          type: string
+        content:
+          type: string
+        author:
+          type: string
+        article:
+          type: string
+        parent:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+    CreateComment:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: string
+        parent:
+          type: string
+          description: optional parent comment ID if it's a reply
+
+    UpdateComment:
+      type: object
+      properties:
+        content:
+          type: string
 
 
     Success:

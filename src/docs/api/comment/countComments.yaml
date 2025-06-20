@@ -1,0 +1,27 @@
+paths:
+  /api/articles/{articleId}/comments/count:
+    get:
+      tags:
+        - Comment
+      summary: Count total comments for an article
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Comment count returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

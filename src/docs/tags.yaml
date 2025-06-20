@@ -8,5 +8,8 @@ tags:
   - name: Admin/User
     description: Everything about Admin/User
 
-  - name: Admin/Todo
-    description: Everything about Admin/Todo
+  - name: Article
+    description: Everything about Articles
+
+  - name: Comment
+    description: Everything about Comments

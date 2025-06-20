@@ -1,0 +1,27 @@
+paths:
+  /api/articles/{id}/share:
+    put:
+      tags:
+        - Article
+      summary: Increment article share count
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Share count incremented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

@@ -16,7 +16,7 @@ const getAll: RequestHandler = AsyncHandler(async (req: Request, res: Response):
     new Types.ObjectId(articleId),
     Number(page || DEFAULT_CURRENT_PAGE),
     Number(pageSize || DEFAULT_PAGE_SIZE),
-    req.query
+    req.query,
   );
 
   res.status(HttpCode.OK).json({
@@ -39,6 +39,30 @@ const getById: RequestHandler = AsyncHandler(async (req: Request, res: Response)
     data: result,
   });
 });
+
+// @desc    Get All Comments (top-level or nested)
+// @route   GET /api/articles/:articleId/comments/:parentId/replies
+// @access  Private
+const getAllReplies: RequestHandler = AsyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    const { articleId, parentId } = req.params;
+    const { page, pageSize } = req.query;
+
+    const result = await commentService.getAll(
+      new Types.ObjectId(articleId),
+      Number(page || DEFAULT_CURRENT_PAGE),
+      Number(pageSize || DEFAULT_PAGE_SIZE),
+      req.query,
+      parentId ? new Types.ObjectId(parentId as string) : undefined,
+    );
+
+    res.status(HttpCode.OK).json({
+      success: true,
+      message: '',
+      data: result,
+    });
+  },
+);
 
 // @desc    Create Comment
 // @route   POST /api/articles/:articleId/comments
@@ -105,6 +129,7 @@ const count: RequestHandler = AsyncHandler(async (req: Request, res: Response): 
 export default {
   getAll,
   getById,
+  getAllReplies,
   create,
   edit,
   remove,
