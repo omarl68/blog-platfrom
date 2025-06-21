@@ -3,6 +3,8 @@ import Authorization from '../../core/middleware/auth';
 import AuthorizeRole from '../../core/middleware/authorizeRole';
 import { RolesEnum } from '../../constants/constants';
 import CommentController from './comment.controller';
+import validator from '../../core/middleware/validator';
+import CommentValidator from './comment.validator';
 
 const router: Router = Router();
 
@@ -27,6 +29,7 @@ router
       RolesEnum.WRITER,
       RolesEnum.READER,
     ]),
+    validator(CommentValidator.createCommentSchema),
     CommentController.create,
   );
 
@@ -77,6 +80,7 @@ router
       RolesEnum.WRITER,
       RolesEnum.READER,
     ]),
+    validator(CommentValidator.updateCommentSchema),
     CommentController.edit,
   )
   .delete(

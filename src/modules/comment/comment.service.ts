@@ -51,7 +51,15 @@ const getById = async (id: Types.ObjectId) => {
 const create = async (userId: Types.ObjectId, item: IComment) => {
   // set current authentificated userid to item
   item.author = userId;
+  if(item.parent){
+    const comment = await CommentsRepository.findById(item.parent);
 
+    // throw error if item not found
+    if (!comment) {
+      throw new ErrorHandler('parent comment not found!', HttpCode.NOT_FOUND);
+    }
+  
+  }
   // create item
   const createdComment = await CommentsRepository.create(item);
 

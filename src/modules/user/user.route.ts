@@ -11,41 +11,6 @@ import { multerConfig } from '../../utils/multer';
 
 const router = express.Router();
 
-/**
- * @swagger
- * tags:
- *   name: Authentication
- *   description: User authentication endpoints
- */
-
-/**
- * @swagger
- * /api/users/login:
- *   post:
- *     tags:
- *       - Authentication
- *     summary: Login user
- *     description: Authenticate a user with email and password
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *               password:
- *                 type: string
- *                 format: password
- *     responses:
- *       200:
- *         description: Login successful
- */
 router.post('/login', validator(UserValidator.loginSchema), UserController.login);
 
 router.post('/register', limiter, validator(UserValidator.registerSchema), UserController.register);
