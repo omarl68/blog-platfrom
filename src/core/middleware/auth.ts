@@ -9,11 +9,9 @@ import JwtHelper from '../utils/jwtHelper';
 import userRepository from '../../modules/user/user.repository';
 
 const Authenticated = expressAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const { refreshToken } = req?.cookies;
-
   const authToken = req?.headers?.authorization;
   const token = authToken && authToken.split(' ')[1];
-  if (!token || !refreshToken) {
+  if (!token) {
     return next(new ErrorHandler('Login first to access this resource.', HttpCode.UNAUTHORIZED));
   }
 

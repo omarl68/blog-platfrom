@@ -11,7 +11,7 @@ export enum EnvironmentEnum {
 }
 
 export enum RolesEnum  {
-  ADMIN = 'ADMIN',
+  ADMIN = 'admin',
   EDITOR = 'editor',
   WRITER = 'writer',
   READER =  'reader'

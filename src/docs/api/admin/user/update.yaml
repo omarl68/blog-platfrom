@@ -5,7 +5,7 @@ paths:
         - BearerAuth: []
       tags:
         - Admin/User
-      summary: Update Admin
+      summary: Update Admin/User
       description: Update an existing Admin By Id
       parameters:
         - name: id

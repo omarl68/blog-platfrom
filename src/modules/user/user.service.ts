@@ -9,7 +9,7 @@ import userRepository from './user.repository';
 
 class UserService {
   static async login(email: string, password: string) {
-    const user = await userRepository.getOneByQuery({ email }, '+password');
+    const user = await userRepository.getOneByQuery({ email }, '+password','role');
     if (!user) {
       throw new ErrorHandler('Invalid credentials', HttpCode.UNAUTHORIZED);
     }
@@ -146,7 +146,7 @@ class UserService {
   }
 
   static async getUserProfile(userId: string) {
-    return await userRepository.getById(new mongoose.Types.ObjectId(userId));
+    return await userRepository.getById(new mongoose.Types.ObjectId(userId),'','role');
   }
 
   static async updateProfile(userId: string, data: any) {

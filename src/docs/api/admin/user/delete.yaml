@@ -5,7 +5,7 @@ paths:
         - BearerAuth: []
       tags:
         - Admin/User
-      summary: Delete Admin
+      summary: Delete Admin/User
       description: Delete Admin By Id
       parameters:
         - name: id

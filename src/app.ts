@@ -13,6 +13,7 @@ import swaggerSpec from './docs/config';
 import routes from './routes';
 import notFound from './core/middleware/notFound';
 import errors from './core/middleware/errors';
+import limiter from './core/middleware/limiter';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use(mongoSanitize());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(limiter)
 
 app.use('/api', routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
